@@ -16,13 +16,14 @@ const tasks = [
 app.get('/', (req, res) => {
     res.send(`
     Implemented APIs:
-    POST    /todos/add          Create a new todo item if length is 20 symbols or less
-    GET     /todos/getall       Get all todos
-    GET     /todos/switch/:id   Switch todo done - undone status
+    POST    /todos/add              Create a new todo item if length is 20 symbols or less
+    GET     /products               Get all products
+    GET     /products/:productId    Get all products
+    GET     /todos/switch/:id       Switch todo done - undone status
     GET     /todos/filterdone/:done   Get filtered todos (all, done, undone)
-    GET     /todos/counter      Get done - undone counter
-    PUT     /todos/:id          Update a todo item
-    DELETE  /todos/:id          Delete a new todo item
+    GET     /todos/counter          Get done - undone counter
+    PUT     /todos/:id              Update a todo item
+    DELETE  /todos/:id              Delete a new todo item
     `);
 });
 
@@ -42,8 +43,15 @@ app.post('/todos/add', (req, res) => {
     }
 });
 
-app.get('/todos/getall', (req, res) => {
+// getProductsList
+app.get('/products', (req, res) => {
     res.send(tasks);
+});
+
+// getProductsById
+app.get('/products/:productId', (req, res) => {
+    const id = req.params.id;
+    res.send(tasks[id]);
 });
 
 app.get('/todos/switch/:id', (req, res) => {
